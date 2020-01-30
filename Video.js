@@ -169,7 +169,10 @@ export default class Video extends Component {
   };
 
   _onReadyForDisplay = (event) => {
-    this._hidePoster();
+    if (!this.props.audioOnly) {
+      this._hidePoster();
+    }
+    
     if (this.props.onReadyForDisplay) {
       this.props.onReadyForDisplay(event.nativeEvent);
     }
@@ -382,6 +385,7 @@ Video.propTypes = {
   poster: PropTypes.string,
   posterResizeMode: Image.propTypes.resizeMode,
   repeat: PropTypes.bool,
+  automaticallyWaitsToMinimizeStalling: PropTypes.bool,
   allowsExternalPlayback: PropTypes.bool,
   selectedAudioTrack: PropTypes.shape({
     type: PropTypes.string.isRequired,
